@@ -2,7 +2,7 @@ extends KinematicBody2D
 
 const UP = Vector2(0, -1)
 
-var motion = Vector2()
+var motion = Vector2(0, 0)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -10,8 +10,7 @@ func _process(delta):
 		motion.x = 100
 	elif Input.is_action_pressed("ui_left"):
 		motion.x = -100
-	else:
-		motion.x = 0
+
 		
 	if is_on_floor():
 		if Input.is_action_just_pressed("ui_up"):
@@ -22,3 +21,5 @@ func _process(delta):
 		motion.y += 10
 		
 	move_and_slide(motion, UP)
+	
+	motion.x = lerp(motion.x, 0, 0.1)
